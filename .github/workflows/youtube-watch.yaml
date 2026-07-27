@@ -1,0 +1,27 @@
+name: YouTube watch updater
+
+on:
+  schedule:
+    - cron: '0 12 * * 1,3,5'
+  workflow_dispatch:
+
+jobs:
+  youtube-watch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run updater
+        run: node scripts/youtube-watch.js
+        env:
+          HOOHU_UA: ${{ secrets.HOOHU_UA }}
+          HOOHU_PASSWORD: ${{ secrets.HOOHU_PASSWORD }}
