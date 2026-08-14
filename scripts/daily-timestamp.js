@@ -1,10 +1,13 @@
+import fs from 'fs/promises';
 import { MediaWikiApi } from 'wiki-saikou';
 import config from './utils/config.js';
 
 const api = new MediaWikiApi(config.api, { headers: { 'user-agent': config.useragent } });
 
 (async () => {
-    console.log(`[${new Date().toISOString()}] Fortnightly timestamp print started.`);
+    const timestamp = new Date().toISOString();
+
+    console.log(`[${timestamp}] Fortnightly timestamp print started.`);
     await api.login(config.bot.name, config.bot.password);
 
     const { data } = await api.postWithToken(
@@ -22,5 +25,6 @@ const api = new MediaWikiApi(config.api, { headers: { 'user-agent': config.usera
     );
 
     console.log(JSON.stringify(data));
+    await fs.appendFile('log.txt', `[${timestamp}] succeeded.\n`);
     console.log(`[${new Date().toISOString()}] Fortnightly timestamp print completed.`);
 })();

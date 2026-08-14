@@ -5,6 +5,9 @@ on:
     - cron: "0 0 1,16 * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   timestamp:
     runs-on: ubuntu-latest
@@ -25,3 +28,15 @@ jobs:
         env:
           HOOHU_UA: ${{ secrets.HOOHU_UA }}
           HOOHU_PASSWORD: ${{ secrets.HOOHU_PASSWORD }}
+
+      - name: Commit log
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add log.txt
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update timestamp print log"
+            git push
+          else
+            echo "No changes to commit"
+          fi
