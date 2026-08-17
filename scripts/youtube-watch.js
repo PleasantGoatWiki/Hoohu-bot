@@ -5,8 +5,8 @@ const api = new MediaWikiApi(config.api, { headers: { 'user-agent': config.usera
 
 const FEED = 'https://www.youtube.com/feeds/videos.xml?channel_id=UCbELDDHGqMbjsA_4Kyd7vMw';
 const TARGET = {
-    json: 'New Wild Cosmos',
-    keywords: ['New', 'Wild', 'Cosmos'],
+    json: 'Bizarre World: Echoes of the Unknown',
+    keywords: ['Bizarre', 'World', 'Echoes', 'Unknown'],
     episodeRegex: /\bEP(\d{2})\b/i
 };
 
