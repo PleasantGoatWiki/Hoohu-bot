@@ -2,7 +2,7 @@ name: Redirect fix (double & broken)
 
 on:
   schedule:
-    - cron: '0 15 1-31/3 * *'
+    - cron: '0 23 1-31/3 * *'
   workflow_dispatch:
 
 jobs:
